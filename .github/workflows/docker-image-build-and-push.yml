@@ -1,5 +1,5 @@
 name: Docker Image CI
-
+    
 env:
   IMAGE_NAME: fca
   IMAGE_TAG: ${{github.run_number}}
