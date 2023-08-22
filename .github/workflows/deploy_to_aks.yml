@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       #SBOM
-    - name: Anchore SBOM
+    - name: Anchore SBOM-AKS-BC1
       uses: anchore/sbom-action@v0
       with:
         image: rcregistry.azurecr.io/fca # ${{ env.loginServerUrl }}/ would be empty if it's hosted on docke
@@ -123,7 +123,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     #Set K8S context
-    - name: Azure Kubernetes set context
+    - name: Azure Kubernetes set context- -AKS-BC1
       uses: Azure/aks-set-context@v1.1
       with:
         # Azure credentials i.e. output of `az ad sp create-for-rbac --sdk-auth`
