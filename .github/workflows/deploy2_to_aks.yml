@@ -88,19 +88,19 @@ jobs:
     - name: Docker Images Build And Push
       uses: azure/docker-login@v1
       with:
-        login-server: rcregistry.azurecr.io # default: index.docker.io
+        login-server: devsecopsacr.azurecr.us # default: index.docker.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -t rcregistry.azurecr.io/fca:${{github.run_number}} -t rcregistry.azurecr.io/fca:latest
-        docker push rcregistry.azurecr.io/fca:${{github.run_number}}
-        docker push rcregistry.azurecr.io/fca:latest
+        docker build . -t devsecopsacr.azurecr.us/fca:${{github.run_number}} -t devsecopsacr.azurecr.us/fca:latest
+        docker push devsecopsacr.azurecr.us/fca:${{github.run_number}}
+        docker push devsecopsacr.azurecr.us/fca:latest
  
     #Container Scan
 #    - name: Container Scan
 #      uses: azure/container-scan@v0
 #      with:
-#        image-name: rcregistry.azurecr.io/fca:${{github.run_number}} # ${{ env.loginServerUrl }}/ would be empty if it's hosted on dockerhub; ${{ github.sha }} could also be replaced with any desired image tag
+#        image-name: devsecopsacr.azurecr.us/fca:${{github.run_number}} # ${{ env.loginServerUrl }}/ would be empty if it's hosted on dockerhub; ${{ github.sha }} could also be replaced with any desired image tag
 #        username: ${{ secrets.REGISTRY_USERNAME }}
 #        password: ${{ secrets.REGISTRY_PASSWORD }}
   
@@ -109,10 +109,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       #SBOM
-    - name: Anchore SBOM-AKS-BC1
+    - name: Anchore SBOM-AKS-BC008
       uses: anchore/sbom-action@v0
       with:
-        image: rcregistry.azurecr.io/fca # ${{ env.loginServerUrl }}/ would be empty if it's hosted on docke
+        image: devsecopsacr.azurecr.us/fca # ${{ env.loginServerUrl }}/ would be empty if it's hosted on docke
         registry-username: ${{ secrets.REGISTRY_USERNAME }}
         registry-password: ${{ secrets.REGISTRY_PASSWORD }}
         
@@ -123,7 +123,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     #Set K8S context
-    - name: Azure Kubernetes set context- -AKS-BC1
+    - name: Azure Kubernetes set context- -AKS-BC007
       uses: Azure/aks-set-context@v1.1
       with:
         # Azure credentials i.e. output of `az ad sp create-for-rbac --sdk-auth`
