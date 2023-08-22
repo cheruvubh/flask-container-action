@@ -79,7 +79,7 @@ jobs:
  #       password: ${{ secrets.REGISTRY_PASSWORD }}
         
     #SBOM
-    - name: Anchore SBOM
+    - name: Anchore SBOM Container Instance****
       uses: anchore/sbom-action@v0
       with:
         image: devsecopsacr.azurecr.us/fca # ${{ env.loginServerUrl }}/ would be empty if it's hosted on docke
