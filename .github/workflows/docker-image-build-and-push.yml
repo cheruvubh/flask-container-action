@@ -90,6 +90,8 @@ jobs:
     - name: 'Deploy to Azure Container Instances--AKS-BC3'
       uses: 'azure/aci-deploy@v1'
       with:
+        creds: ${{ secrets.AZ_CREDS }}
+        environment: 'AzureUSGovernment'
         resource-group: aks
         dns-name-label: flaskacidemo
         image: devsecopsacr.azurecr.us/fca:${{github.run_number}}
