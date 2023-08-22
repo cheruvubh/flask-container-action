@@ -87,7 +87,7 @@ jobs:
         registry-password: ${{ secrets.REGISTRY_PASSWORD }}
 
     #Deploy ACI
-    - name: 'Deploy to Azure Container Instances'
+    - name: 'Deploy to Azure Container Instances--AKS-BC3'
       uses: 'azure/aci-deploy@v1'
       with:
         resource-group: aks
