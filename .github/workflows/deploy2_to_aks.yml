@@ -104,17 +104,17 @@ jobs:
 #        username: ${{ secrets.REGISTRY_USERNAME }}
 #        password: ${{ secrets.REGISTRY_PASSWORD }}
   
-  SBOM:
-    needs: Docker_Build_And_Scan
-    runs-on: ubuntu-latest
-    steps:
+#  SBOM:
+#    needs: Docker_Build_And_Scan
+#    runs-on: ubuntu-latest
+#    steps:
       #SBOM
-    - name: Anchore SBOM-AKS-BC008
-      uses: anchore/sbom-action@v0
-      with:
-        image: devsecopsacr.azurecr.us/fca # ${{ env.loginServerUrl }}/ would be empty if it's hosted on docke
-        registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+#    - name: Anchore SBOM-AKS-BC008
+#      uses: anchore/sbom-action@v0
+#      with:
+#        image: devsecopsacr.azurecr.us/fca # ${{ env.loginServerUrl }}/ would be empty if it's hosted on docke
+#        registry-username: ${{ secrets.REGISTRY_USERNAME }}
+#        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
         
 
   Deploy_To_AKS:
