@@ -129,9 +129,9 @@ jobs:
         # Azure credentials i.e. output of `az ad sp create-for-rbac --sdk-auth`
         creds: ${{ secrets.AZ_CREDS }}
         # Resource Group Name
-        resource-group: aks
+        resource-group: tf-noops-usgaz-gov-dev-rg
         # AKS Cluster Name
-        cluster-name: rckluster
+        cluster-name: tf-noops-usgaz-gov-dev-aks
 
     #Create K8S Secret
     - name: Create secret in Kubernetes cluster
