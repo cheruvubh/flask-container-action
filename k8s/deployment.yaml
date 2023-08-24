@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: fca
-        image: devsecopsacr.azurecr.io/fca:latest
+        image: devsecopsacr.azurecr.us/fca:latest
         imagePullPolicy: Always
         resources:
           limits:
