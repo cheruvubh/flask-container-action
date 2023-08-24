@@ -15,7 +15,7 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZ_CREDS }}
-    
+        environment: 'AzureUSGovernment'    
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
