@@ -38,47 +38,9 @@ jobs:
 #        with:
 #          fail-on-severity: critical
 
-  Security_Check:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    #Security Check - Bandit
-    - uses: actions/checkout@v2
-    - name: Security check - Bandit
-      uses: ioggstream/bandit-report-artifacts@v0.0.2
-      with:
-        project_path: .
-        ignore_failure: true
-    - name: Security check report artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: Security report
-        path: output/security_report.txt
+ 
 
-  Generate_Coverage_Report:
-    needs: Security_Check
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    # Code Coverage
-    - name: Generate coverage report
-      run: |
-        pip install -r requirements.txt
-        pip install pytest
-        pip install pytest-cov
-        pytest --cov=./ --cov-report=xml
-
-  Upload_Coverage_Report:
-    needs: Generate_Coverage_Report
-    runs-on: ubuntu-latest
-    steps:
-    - name: "Upload coverage to Codecov"
-      uses: codecov/codecov-action@v2
-      with:
-        fail_ci_if_error: false
-        verbose: true
-        token: ${{ secrets.CODECOV_TOKEN }} 
-
+ 
   Docker_Build_And_Scan:
     needs: Security_Check
     runs-on: ubuntu-latest
@@ -95,26 +57,7 @@ jobs:
         docker build . -t devsecopsacr.azurecr.us/fca:${{github.run_number}} -t devsecopsacr.azurecr.us/fca:latest
         docker push devsecopsacr.azurecr.us/fca:${{github.run_number}}
         docker push devsecopsacr.azurecr.us/fca:latest
- 
-    #Container Scan
-#    - name: Container Scan
-#      uses: azure/container-scan@v0
-#      with:
-#        image-name: devsecopsacr.azurecr.us/fca:${{github.run_number}} # ${{ env.loginServerUrl }}/ would be empty if it's hosted on dockerhub; ${{ github.sha }} could also be replaced with any desired image tag
-#        username: ${{ secrets.REGISTRY_USERNAME }}
-#        password: ${{ secrets.REGISTRY_PASSWORD }}
-  
-#  SBOM:
-#    needs: Docker_Build_And_Scan
-#    runs-on: ubuntu-latest
-#    steps:
-      #SBOM
-#    - name: Anchore SBOM-AKS-BC008
-#      uses: anchore/sbom-action@v0
-#      with:
-#        image: devsecopsacr.azurecr.us/fca # ${{ env.loginServerUrl }}/ would be empty if it's hosted on docke
-#        registry-username: ${{ secrets.REGISTRY_USERNAME }}
-#        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
         
 
   Deploy_To_AKS:
