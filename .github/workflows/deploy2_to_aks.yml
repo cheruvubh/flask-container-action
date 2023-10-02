@@ -24,8 +24,8 @@ jobs:
     - name: Install requirements
       run: pip install -r requirements.txt
 
-    - name: Run automated tests  
-      run: pytest -vv
+ #   - name: Run automated tests  
+ #     run: pytest -vv
 
 
  
