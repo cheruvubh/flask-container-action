@@ -28,15 +28,7 @@ jobs:
       run: pytest -vv
 
 
-#  Dependency-Review:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: 'Checkout Repository'
-#        uses: actions/checkout@v3
-#      - name: Dependency Review
-#        uses: actions/dependency-review-action@v2
-#        with:
-#          fail-on-severity: critical
+ 
 
   Security_Check:
     needs: build
@@ -55,30 +47,7 @@ jobs:
         name: Security report
         path: output/security_report.txt
 
-  Generate_Coverage_Report:
-    needs: Security_Check
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    # Code Coverage
-    - name: Generate coverage report
-      run: |
-        pip install -r requirements.txt
-        pip install pytest
-        pip install pytest-cov
-        pytest --cov=./ --cov-report=xml
-
-  Upload_Coverage_Report:
-    needs: Generate_Coverage_Report
-    runs-on: ubuntu-latest
-    steps:
-    - name: "Upload coverage to Codecov"
-      uses: codecov/codecov-action@v2
-      with:
-        fail_ci_if_error: false
-        verbose: true
-        token: ${{ secrets.CODECOV_TOKEN }} 
-
+ 
   Docker_Build_And_Scan:
     needs: Security_Check
     runs-on: ubuntu-latest
